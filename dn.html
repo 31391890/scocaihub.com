@@ -1,0 +1,725 @@
+
+    <title>SCOCAIHUB.com - 智慧城市AI生态枢纽</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #0a1628 0%, #0a2238 25%, #0f1f35 50%, #15253a 75%, #0a1628 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 136, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 136, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .building {
+            position: fixed;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(0, 255, 136, 0.15) 0%, transparent 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .data-line {
+            position: fixed;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.25), transparent);
+            animation: dataFlow 5s infinite ease-in-out;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        @keyframes dataFlow {
+            0%, 100% { opacity: 0; transform: scaleX(0); }
+            50% { opacity: 1; transform: scaleX(1); }
+        }
+        
+        .tech-dot {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            animation: dotPulse 4s infinite ease-in-out;
+            z-index: 0;
+            pointer-events: none;
+            box-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
+        }
+        
+        @keyframes dotPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+        
+        .navbar {
+            background: rgba(10, 22, 40, 0.92);
+            backdrop-filter: blur(15px);
+            border-bottom: 2px solid rgba(0, 255, 136, 0.25);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 30px rgba(0, 255, 136, 0.15);
+        }
+        
+        .nav-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.6rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+            letter-spacing: 3px;
+        }
+        
+        .nav-links a {
+            margin-left: 2rem;
+            text-decoration: none;
+            color: #e8e8e8;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #00ff88, #00cc6a);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: #00ff88;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+        
+        .hero {
+            padding: 9rem 5% 5rem;
+            text-align: center;
+            color: white;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .domain-name {
+            font-size: 5.8rem;
+            font-weight: bold;
+            margin-bottom: 1.6rem;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 50%, #00ee99 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
+            animation: fadeInUp 1s ease, techGlow 3s ease-in-out infinite;
+            letter-spacing: 4px;
+        }
+        
+        @keyframes techGlow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.35)); }
+            50% { filter: drop-shadow(0 0 35px rgba(0, 255, 136, 0.6)); }
+        }
+        
+        .domain-tagline {
+            font-size: 1.65rem;
+            margin-bottom: 2.8rem;
+            opacity: 0.95;
+            color: #e8ffe8;
+            animation: fadeInUp 1.2s ease;
+            letter-spacing: 1.2px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1.35rem 3.8rem;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            color: #0a1628;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.22rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 25px rgba(0, 255, 136, 0.45), inset 0 0 15px rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 1.4s ease, buttonPulse 2s ease-in-out infinite;
+            border: 2px solid rgba(0, 255, 136, 0.35);
+        }
+        
+        @keyframes buttonPulse {
+            0%, 100% { box-shadow: 0 5px 25px rgba(0, 255, 136, 0.45), inset 0 0 15px rgba(255, 255, 255, 0.2); }
+            50% { box-shadow: 0 8px 35px rgba(0, 255, 136, 0.65), inset 0 0 25px rgba(255, 255, 255, 0.3); }
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 35px rgba(0, 255, 136, 0.65), inset 0 0 25px rgba(255, 255, 255, 0.3);
+        }
+        
+        .section {
+            padding: 5rem 5%;
+            max-width: 1800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 3.3rem;
+            margin-bottom: 1.2rem;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.35);
+            letter-spacing: 2.2px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 3.8rem;
+            opacity: 0.75;
+            color: #e8ffe8;
+            letter-spacing: 1.5px;
+        }
+        
+        .meanings-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.6rem;
+            width: 100%;
+        }
+        
+        .meaning-card {
+            background: rgba(10, 22, 40, 0.68);
+            backdrop-filter: blur(20px);
+            border: 1.5px solid rgba(0, 255, 136, 0.22);
+            padding: 3rem;
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .meaning-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #00ff88, #00cc6a, #00ee99);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+        
+        .meaning-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .meaning-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(0, 255, 136, 0.6);
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.25), inset 0 0 25px rgba(0, 255, 136, 0.08);
+        }
+        
+        .meaning-icon {
+            font-size: 4rem;
+            margin-bottom: 1.3rem;
+            filter: drop-shadow(0 0 15px rgba(0, 255, 136, 0.5));
+        }
+        
+        .meaning-title {
+            font-size: 1.52rem;
+            font-weight: bold;
+            margin-bottom: 0.85rem;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .meaning-desc {
+            color: #e8ffe8;
+            line-height: 1.95;
+            font-size: 1.06rem;
+            opacity: 0.92;
+        }
+        
+        .scenarios {
+            background: rgba(0, 255, 136, 0.038);
+            backdrop-filter: blur(20px);
+            border: 1.5px solid rgba(0, 255, 136, 0.15);
+            border-radius: 22px;
+            padding: 3.8rem;
+            margin: 2.3rem auto;
+            max-width: 1700px;
+            box-shadow: 0 10px 50px rgba(0, 255, 136, 0.095);
+        }
+        
+        .scenario-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.6rem;
+            width: 100%;
+        }
+        
+        .scenario-item {
+            background: rgba(10, 22, 40, 0.68);
+            backdrop-filter: blur(20px);
+            border: 1.5px solid rgba(0, 255, 136, 0.22);
+            padding: 2.6rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .scenario-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #00ff88, #00cc6a, #00ee99);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+        
+        .scenario-item:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .scenario-item:hover {
+            transform: translateY(-9px) scale(1.03);
+            border-color: rgba(0, 255, 136, 0.6);
+            box-shadow: 0 13px 38px rgba(0, 255, 136, 0.25);
+        }
+        
+        .scenario-icon {
+            font-size: 3.3rem;
+            margin-bottom: 1.3rem;
+            filter: drop-shadow(0 0 13px rgba(0, 255, 136, 0.48));
+        }
+        
+        .scenario-name {
+            font-weight: bold;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.65rem;
+            font-size: 1.28rem;
+        }
+        
+        .scenario-item p {
+            color: #e8ffe8;
+            opacity: 0.88;
+            font-size: 0.97rem;
+        }
+        
+        .advantages {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.6rem;
+            margin-top: 2.8rem;
+            width: 100%;
+        }
+        
+        .advantage-item {
+            text-align: center;
+            background: rgba(10, 22, 40, 0.68);
+            backdrop-filter: blur(20px);
+            border: 1.5px solid rgba(0, 255, 136, 0.22);
+            padding: 3rem;
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .advantage-item:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(0, 255, 136, 0.6);
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.25);
+        }
+        
+        .advantage-number {
+            font-size: 4.1rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.3rem;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.42));
+        }
+        
+        .advantage-text {
+            font-weight: bold;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.32rem;
+            margin-bottom: 0.65rem;
+        }
+        
+        .advantage-item p {
+            color: #e8ffe8;
+            opacity: 0.88;
+            font-size: 0.97rem;
+        }
+        
+        .contact {
+            background: rgba(10, 22, 40, 0.72);
+            backdrop-filter: blur(25px);
+            border: 1.5px solid rgba(0, 255, 136, 0.28);
+            padding: 5.2rem;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 15px 60px rgba(0, 255, 136, 0.16), inset 0 0 45px rgba(0, 255, 136, 0.055);
+            max-width: 1320px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.085) 0%, transparent 62%);
+            animation: rotate 22s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .contact .section-title {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact p {
+            font-size: 1.28rem;
+            color: #e8ffe8;
+            opacity: 0.92;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 0.8rem;
+        }
+        
+        .contact-info {
+            margin: 2.8rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 920px;
+            margin: 2.8rem auto;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        
+        .contact-item {
+            font-size: 1.38rem;
+            color: #e8ffe8;
+            padding: 1.15rem 2.3rem;
+            background: rgba(10, 22, 40, 0.58);
+            border-radius: 13px;
+            border: 1px solid rgba(0, 255, 136, 0.18);
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .contact-label {
+            font-weight: bold;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .email-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1.2rem 3.2rem;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            color: #0a1628;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.15rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 25px rgba(0, 255, 136, 0.45), inset 0 0 15px rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(0, 255, 136, 0.35);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .email-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 35px rgba(0, 255, 136, 0.65), inset 0 0 25px rgba(255, 255, 255, 0.3);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 3.3rem;
+            color: #e8ffe8;
+            opacity: 0.68;
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid rgba(0, 255, 136, 0.12);
+            margin-top: 3.3rem;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(42px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 1200px) {
+            .meanings-grid, .scenario-list, .advantages {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .meanings-grid, .scenario-list, .advantages {
+                grid-template-columns: 1fr;
+            }
+            
+            .domain-name {
+                font-size: 3.6rem;
+                letter-spacing: 2.5px;
+            }
+            
+            .domain-tagline {
+                font-size: 1.25rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .section-title {
+                font-size: 2.3rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.15rem;
+            }
+            
+            .contact {
+                padding: 3.3rem 2.3rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1.3rem;
+            }
+        }
+    </style>
+
+
+    
+    <div class="building" style="left: 5%; width: 80px; height: 180px;"></div>
+    <div class="building" style="left: 15%; width: 100px; height: 220px;"></div>
+    <div class="building" style="left: 25%; width: 70px; height: 160px;"></div>
+    <div class="building" style="left: 35%; width: 120px; height: 260px;"></div>
+    <div class="building" style="left: 45%; width: 90px; height: 200px;"></div>
+    <div class="building" style="left: 55%; width: 110px; height: 240px;"></div>
+    <div class="building" style="left: 65%; width: 80px; height: 180px;"></div>
+    <div class="building" style="left: 75%; width: 100px; height: 220px;"></div>
+    <div class="building" style="left: 85%; width: 70px; height: 160px;"></div>
+    
+    
+    <div class="tech-dot" style="top: 12%; left: 10%; animation-delay: 0s;"></div>
+    <div class="tech-dot" style="top: 28%; right: 15%; animation-delay: 1.5s;"></div>
+    <div class="tech-dot" style="top: 42%; left: 20%; animation-delay: 3s;"></div>
+    <div class="tech-dot" style="top: 58%; right: 25%; animation-delay: 0.8s;"></div>
+    <div class="tech-dot" style="top: 75%; left: 30%; animation-delay: 2.2s;"></div>
+    <div class="tech-dot" style="top: 88%; right: 12%; animation-delay: 1s;"></div>
+    
+    
+    <div class="data-line" style="top: 25%; left: 8%; width: 180px; animation-delay: 0s;"></div>
+    <div class="data-line" style="top: 50%; left: 22%; width: 200px; animation-delay: 1.5s;"></div>
+    <div class="data-line" style="top: 75%; left: 35%; width: 160px; animation-delay: 3s;"></div>
+
+    
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">SCOCAIHUB.COM</div>
+            <div class="nav-links">
+                <a href="#meanings">含义解读</a>
+                <a href="#scenarios">应用场景</a>
+                <a href="#advantages">价值优势</a>
+                <a href="#contact">联系购买</a>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="hero">
+        <div class="domain-name">SCOCAIHUB.COM</div>
+        <div class="domain-tagline">智慧城市AI生态枢纽 · 全球顶级域名 · 城市智能产业聚合核心平台</div>
+        <a href="#contact" class="cta-button">立即咨询</a>
+    </section>
+
+    
+    <section class="section" id="meanings">
+        <h2 class="section-title">SCOCAIHUB 专业释义</h2>
+        <div class="section-subtitle">四大核心价值定位</div>
+        <div class="meanings-grid">
+            <div class="meaning-card">
+                <div class="meaning-icon">🌐</div>
+                <div class="meaning-title">Smart City Operation Center Hub</div>
+                <div class="meaning-desc">智慧城市运营中心生态枢纽，整合全球智慧城市场景资源</div>
+            </div>
+            <div class="meaning-card">
+                <div class="meaning-icon">🤝</div>
+                <div class="meaning-title">AI产业聚合平台</div>
+                <div class="meaning-desc">汇聚技术、产品、服务、人才的智慧城市AI产业生态圈</div>
+            </div>
+            <div class="meaning-card">
+                <div class="meaning-icon">🔗</div>
+                <div class="meaning-title">全球资源链接枢纽</div>
+                <div class="meaning-desc">连接政企产学研用，促进智慧城市领域技术成果转化与合作</div>
+            </div>
+            <div class="meaning-card">
+                <div class="meaning-icon">🚀</div>
+                <div class="meaning-title">创新孵化加速中心</div>
+                <div class="meaning-desc">智慧城市AI解决方案孵化、项目落地、产业加速服务平台</div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="section" id="scenarios">
+        <h2 class="section-title">核心应用场景</h2>
+        <div class="section-subtitle">构建全链路智慧城市AI生态体系</div>
+        <div class="scenarios">
+            <div class="scenario-list">
+                <div class="scenario-item">
+                    <div class="scenario-icon">🏛️</div>
+                    <div class="scenario-name">政府治理平台</div>
+                    <p>城市管理中枢系统、政务服务数字化、公共安全应急指挥</p>
+                </div>
+                <div class="scenario-item">
+                    <div class="scenario-icon">💼</div>
+                    <div class="scenario-name">产业服务枢纽</div>
+                    <p>智慧城市解决方案供需对接、产业集群服务、项目招投标</p>
+                </div>
+                <div class="scenario-item">
+                    <div class="scenario-icon">📚</div>
+                    <div class="scenario-name">技术创新社区</div>
+                    <p>AI算法开源、技术交流培训、行业标准制定、成果展示</p>
+                </div>
+                <div class="scenario-item">
+                    <div class="scenario-icon">🌍</div>
+                    <div class="scenario-name">国际合作门户</div>
+                    <p>全球智慧城市经验交流、跨境项目合作、国际资源对接</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="section" id="advantages">
+        <h2 class="section-title">域名核心价值</h2>
+        <div class="section-subtitle">四大核心优势</div>
+        <div class="advantages">
+            <div class="advantage-item">
+                <div class="advantage-number">9</div>
+                <div class="advantage-text">字符长度</div>
+                <p>品牌辨识度高，Hub后缀精准传达生态平台属性</p>
+            </div>
+            <div class="advantage-item">
+                <div class="advantage-number">全球级</div>
+                <div class="advantage-text">域名后缀</div>
+                <p>.com国际顶级域名，适合全球化业务布局与品牌传播</p>
+            </div>
+            <div class="advantage-item">
+                <div class="advantage-number">生态级</div>
+                <div class="advantage-text">商业定位</div>
+                <p>天然适合打造智慧城市AI领域的产业聚合平台</p>
+            </div>
+            <div class="advantage-item">
+                <div class="advantage-number">稀缺性</div>
+                <div class="advantage-text">独家资源</div>
+                <p>智慧城市垂直领域唯一匹配HUB生态属性的顶级域名</p>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="section" id="contact">
+        <div class="contact">
+            <h2 class="section-title">联系购买</h2>
+            <p>欢迎咨询域名交易事宜</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-label">邮箱：</div>
+                    <div>ai@altoai.cn</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">微信：</div>
+                    <div>altoai</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">QQ：</div>
+                    <div>31391890</div>
+                </div>
+            </div>
+            <a href="mailto:ai@altoai.cn?subject=咨询 SCOCAIHUB.com 域名转让" class="email-btn">📧 发送邮件咨询</a>
+        </div>
+    </section>
+
+    
+    <footer class="footer">
+        <p>© 2026 Alto</p></footer>
